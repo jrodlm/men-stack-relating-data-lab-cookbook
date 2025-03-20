@@ -39,8 +39,6 @@ app.use(
   })
 );
 
-// server.js
-
 app.use(passUserToView);
 app.use('/auth', authController);
 app.use(isSignedIn);
@@ -48,8 +46,9 @@ app.use('/recipes', recipesController);
 app.use('/ingredients', ingredientsController);
 
 
+
 app.get('/', (req, res) => {
-  res.render('index.ejs', {
+  res.render('home.ejs', {
     user: req.session.user,
   });
 });

@@ -1,14 +1,12 @@
 <nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        
+    <p>
+    <a href="/">  Home | </a>
         <% if (!user) { %>  <!-- If user is NOT logged in -->
-            <li><a href="/auth/signin">Sign In</a></li>
-            <li><a href="/auth/signup">Sign Up</a></li>
+            <a href="/auth/signin">Sign In</a>
+            <a href="/auth/signup">Sign Up</a>
         <% } else { %>  <!-- If user is logged in -->
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/auth/signout">Sign Out</a></li>
+           <a href="/view-recipes">  View My Recipes | </a>
+           <a href="/auth/sign-out">  Sign Out</a>
         <% } %>
-    </ul>
+        </p>
 </nav>

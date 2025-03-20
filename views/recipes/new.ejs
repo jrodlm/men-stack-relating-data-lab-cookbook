@@ -7,21 +7,25 @@
     <title>New Recipe</title>
 </head>
 <body>
-    <%- include('./partials/_navbar.ejs') %>
     <h1>Add a new recipe!</h1>
+    <%- include('../partials/_navbar.ejs') %>
     <form action="/recipes" method="POST">
         <label for="recipe-name">Recipe Name:</label>
-        <input type="text" name="recipe-name" id="recipe-name" />
-
+        <input type="text" name="name" id="recipe-name" />
+<br>
+<br>
         <label for="instructions">Instructions:</label>
         <input type="text" name="instructions" id="instructions" />
-
-        <label for="owner"><%= user.username %></label>
+<br>
+<br>
+        <label for="owner">Owner: <%= user.username %></label>
         <!-- <input type="text" name="flower" id="flower" /> -->
-
-        <label for="insgredients">Ingredients:</label>
-        <input type="text" name="ingredients" id="ingredients" />
-
+<br>
+<br>
+        <!-- <label for="ingredients">Ingredients:</label>
+        <input type="text" name="ingredients" id="ingredients" /> -->
+<br>
+<br>
         <button type="submit">Add Recipe</button>
     </form>
 </body>
