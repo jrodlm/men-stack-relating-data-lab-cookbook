@@ -8,5 +8,16 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>Welcome to My Recipes</h1>
+    <% if(recipes.length){ %>
+     <ul>
+        <% recipes.forEach((recipe) => { %>
+        <a href="/recipes/<%= recipe._id %>">
+        <li> <%= recipe.name %> </li>
+        </a> 
+      <%  }) %>
+    </ul>
+    <% } else { %>
+        <p>You have not created any recipes yet.</p>
+   <% } %>
   </body>
 </html>

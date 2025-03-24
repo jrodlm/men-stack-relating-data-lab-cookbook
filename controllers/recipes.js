@@ -13,7 +13,18 @@ const Recipe = require('../models/recipe.js');
   
   // INDEX
   router.get('/', async (req, res) => {
-    res.render('recipes/index.ejs');
+   try {
+    const allRecipes = await Recipe.find()
+    console.log(allRecipes)
+    res.render('recipes/index.ejs', {
+        recipes: allRecipes 
+    });
+   } catch (error) {
+     console.log(error)
+     res.redirect('/')
+   }
+   
+   
   });
   
   
@@ -44,6 +55,8 @@ router.post('/', async (req, res) => {
   
   });
   
+
+
   
 //   // DELETE
 //   router.delete("/recipes/:recipeId", async (req, res) => {
@@ -63,8 +76,6 @@ router.post('/', async (req, res) => {
 //   });
   
 
-
-  
 //   // EDIT
 //   router.get("/recipes/:recipeId/edit", async (req, res) => {
 //     const foundRecipe = await Recipe.findById(req.params.recipeId);
@@ -72,5 +83,18 @@ router.post('/', async (req, res) => {
 //       recipe: foundRecipe,
 //     });
 //   });
+
+// SHOW ROUTE
+router.get('/:recipeId', async (req, res) => {
+    try {
+        const recipe = recipes.id(req.params.recipeId);
+        res.render('recipes/show.ejs', {
+            recipe: recipe,
+        });
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+});
 
   module.exports = router 
