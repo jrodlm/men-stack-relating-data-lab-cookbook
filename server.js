@@ -15,7 +15,7 @@ const passUserToView = require('./middleware/pass-user-to-view.js');
 const recipesController = require('./controllers/recipes.js');
 const authController = require('./controllers/auth.js');
 const ingredientsController = require('./controllers/ingredients.js');
-
+const userController = require('./controllers/users');
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
@@ -25,11 +25,11 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
 });
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use('/users', userController);
 
 app.use(
   session({
@@ -45,8 +45,6 @@ app.use(isSignedIn);
 app.use('/recipes', recipesController);
 app.use('/ingredients', ingredientsController);
 
-
-
 app.get('/', (req, res) => {
   res.render('home.ejs', {
     user: req.session.user,
@@ -61,15 +59,9 @@ app.get('/vip-lounge', (req, res) => {
   }
 });
 
-app.use('/auth', authController);
-app.use('/recipes/:recipeId/recipes', recipesController); 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
-
-
-
-
 
 
 

@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Recipes</title>
-  </head>
-  <body>
-    <%- include('../partials/_navbar.ejs') %>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Recipes</title>
+</head>
+
+<body>
+  <%- include('../partials/_navbar.ejs') %>
     <h1>Welcome to My Recipes</h1>
     <% if(recipes.length){ %>
-     <ul>
-        <% recipes.forEach((recipe) => { %>
-        <a href="/recipes/<%= recipe._id %>">
-        <li> <%= recipe.name %> </li>
-        </a> 
-      <%  }) %>
-    </ul>
-    <% } else { %>
+      <ul>
+        <% recipes.forEach((recipe)=> { %>
+          <a href="/recipes/<%= recipe._id %>">
+            <li>
+              <%= recipe.name %>
+            </li>
+          </a>
+          <strong>Ingredients:</strong>
+          <ul>
+            <% recipe.ingredients.forEach(ingredient => { %>
+              <li><%= ingredient.name %></li>
+            <% }) %>
+          </ul>
+          <a href="/recipes/<%= recipe._id %>/edit">
+            <button>Edit</button>
+          </a>
+
+          <% }) %>
+      </ul>
+      <% } else { %>
         <p>You have not created any recipes yet.</p>
-   <% } %>
-  </body>
+        <% } %>
+</body>
+
 </html>
