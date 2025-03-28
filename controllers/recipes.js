@@ -6,12 +6,8 @@ const Recipe = require('../models/recipe.js');
 const Ingredient = require('../models/ingredient');
 
 
-// name, instructions,
-
 // RECIPE ROUTES // 
 // I.N.D.U.C.E.S 
-
-// ROOT/HOME
   
   // INDEX
   router.get('/', async (req, res) => {
@@ -85,7 +81,6 @@ router.put('/:recipeId', async (req, res) => {
 
     // Ensure user field still exists
     recipe.user = recipe.user || req.session.user._id;
-
     await recipe.save();
     res.redirect('/recipes');
   } catch (err) {
@@ -100,14 +95,12 @@ router.get('/:recipeId/edit', async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.recipeId);
     const ingredients = await Ingredient.find();
-
     res.render('recipes/edit.ejs', { recipe, ingredients });
   } catch (err) {
     console.error('Error loading edit form:', err);
     res.redirect('/');
   }
 });
-
 
 
 // SHOW ROUTE
